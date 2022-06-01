@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8">
+        <title>Blackjack</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="Index.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Simple $5 BlackJack Hands</h1>
+        <h3>Rules: No splitting & No double down</h3>
+    </header>
+
+    <div id="hands">
+        <div id="dealerHand">
+            <h1>Dealer's Hand</h1>
+            <div id="dealerCards">
+                <img id="dCard1" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="dCard2" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="dCard3" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="dCard4" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="dCard5" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="dCard6" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="dCard7" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+            </div>  <br> <br>
+            <div id="userCards" class="uValue">
+                <img id="uCard1" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="uCard2" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="uCard3" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="uCard4" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="uCard5" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="uCard6" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+                <img id="uCard7" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
+            </div>
+            <h1 id="userHands">User's Hand</h1>
+            <h1 id="currentCount" style="display:none"></h1>
+        </div>
+    </div>
+
+    <div class="float-parent-element">
+        <div class="float-child-element">
+          <div id="balancethis" class="balance3">
+            <h1>Balance</h1> 
+            <h2>$</h2>
+            <h2 id="total">0</h2>
+        </div>
+        </div>
+        <div class="parent">
+            <button id="dealBtn">Deal</button>
+            <button class="array" id="hitBtn">Hit</button>
+            <button class="array" id="stayBtn">Stay</button>
+            <button id="reset" type ="reset">Reset Hand's</button>
+        </div>
+    </div> 
+</body>
+</html>

@@ -1,0 +1,88 @@
+body {
+    background-image: url(https://cdn.shopify.com/s/files/1/1279/9999/products/60-6100_lg2_5000x.jpg?v=1571438929);
+    background-size: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    
+}
+
+header {
+    text-align: center;
+    color: yellow;
+    outline-color: black;
+    outline-style: solid;
+}
+
+#dealerHand{
+    text-align: center;
+    text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+    color: red;
+}
+
+#userHands { 
+    text-align: center;
+    text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    color: red;
+}
+
+.balance {
+    background-color: lightgrey;
+    width: 125px;
+    border: 15px solid rgb(55, 255, 0);
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+    font-size: 18px;
+    
+}
+.balance2 {
+    background-color: lightgrey;
+    width: 125px;
+    border: 15px solid red;
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+    font-size: 18px;
+    
+}
+.balance3 {
+    background-color: lightgrey;
+    width: 125px;
+    border: 15px solid lightgrey;
+    padding: 10px;
+    margin: 20px;
+    text-align: center;
+    font-size: 18px;
+    
+}
+
+button {
+    font-size: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.float-parent-element { 
+    width: 100%; 
+} 
+.float-child-element { 
+    float: left; 
+    width: 50%; 
+    height: fit-content;
+} 
+
+.parent {
+    padding: 2rem;
+    margin: 1rem;
+    
+    text-align: center;
+  }
+
+.hidden {
+    display: none;
+}
