@@ -4,6 +4,8 @@ let cardsValueNew
 let allUserCards
 let userTotal
 let cards
+let dealerTotal 
+let newCount = 1
 function dealCards(data){
     document.getElementById("dealBtn").disabled = true
     count = 0
@@ -50,6 +52,7 @@ function userAction(button){
 function increase(){ 
     return count++
 }
+
 function userHit(){
     allUserCards = [ 1, 2, 3, 4, 5, 6, 7]
     increase()
@@ -89,7 +92,7 @@ function hitAndCount(allUserCards, userTotal){
             }
     }
 }
-function stayClick(){
+function stayClick(){    
     if (count === 0){
         userTotal = parseInt(cardsValueNew[7])+ parseInt(cardsValueNew[8])
     }
@@ -111,25 +114,17 @@ function stayClick(){
             }             
         } 
     }
-    let dealerCard2 = document.querySelector('#dCard2')
-    dealerCard2.src = cards[1].image
-    document.getElementById("hitBtn").disabled = true;
-    document.getElementById("stayBtn").disabled = true;
-    let dealerTotal = parseInt(cardsValueNew[0]) + parseInt(cardsValueNew[1])
+    updateDealerCardandValue()
+    if (dealerTotal > 21){
+        setTimeout(() => {
+            alert("Congrats, Dealer Busted. You Won!")}, 1000)
+            myResetFunc()
+            userWin()
+    }
     gameOver(dealerTotal, userTotal)
+
     if (dealerTotal <=16){
-        let dealerCard3 = document.querySelector('#dCard3')
-        dealerCard3.src = cards[2].image
-        dealerCard3.classList.remove("hidden")
-        dealerTotal = dealerTotal + parseInt(cardsValueNew[2])
-        if(dealerTotal > 21 && true === cardsValueNew.includes("11"))
-            for(i=0; i < cardsValueNew.length; i++){
-                if(cardsValueNew[i] === "11"){
-                    cardsValueNew[i] = 1
-                }
-                dealerTotal =  parseInt(cardsValueNew[0]) + parseInt(cardsValueNew[1]) + parseInt(cardsValueNew[2])
-     
-            }
+        updateDealerCardandValue()
         if (dealerTotal > 21){
             setTimeout(() => {
                 alert("Congrats, Dealer Busted. You Won!")}, 1000)
@@ -138,17 +133,7 @@ function stayClick(){
         }
         gameOver(dealerTotal, userTotal)
         if (dealerTotal <=16){
-            let dealerCard4 = document.querySelector('#dCard4')
-            dealerCard4.src = cards[3].image
-            dealerCard4.classList.remove("hidden")
-            dealerTotal = dealerTotal + parseInt(cardsValueNew[3])
-            if(dealerTotal > 21 && true === cardsValueNew.includes("11"))
-                for(i=0; i < cardsValueNew.length; i++){
-                    if(cardsValueNew[i] === "11"){
-                        cardsValueNew[i] = 1
-                    }
-                dealerTotal =  parseInt(cardsValueNew[0]) + parseInt(cardsValueNew[1]) + parseInt(cardsValueNew[2])+ parseInt(cardsValueNew[3])
-                }
+            updateDealerCardandValue()
             if (dealerTotal > 21){
                 setTimeout(() => {
                     alert("Congrats, Dealer Busted. You Won!")}, 1000)
@@ -157,17 +142,7 @@ function stayClick(){
             }
             gameOver(dealerTotal, userTotal)
             if (dealerTotal <=16){
-                let dealerCard5 = document.querySelector('#dCard5')
-                dealerCard5.src = cards[4].image
-                dealerCard5.classList.remove("hidden")
-                dealerTotal = dealerTotal + parseInt(cardsValueNew[4])
-                if(dealerTotal > 21 && true === cardsValueNew.includes("11"))
-                    for(i=0; i < cardsValueNew.length; i++){
-                        if(cardsValueNew[i] === "11"){
-                            cardsValueNew[i] = 1
-                        }
-                    dealerTotal =  parseInt(cardsValueNew[0]) + parseInt(cardsValueNew[1]) + parseInt(cardsValueNew[2]) + parseInt(cardsValueNew[3])+ parseInt(cardsValueNew[4])
-                    }
+                updateDealerCardandValue()
                 if (dealerTotal > 21){
                     setTimeout(() => {
                         alert("Congrats, Dealer Busted. You Won!")}, 1000)
@@ -176,17 +151,7 @@ function stayClick(){
                 }
                 gameOver(dealerTotal, userTotal)
                 if (dealerTotal <=16){
-                    let dealerCard6 = document.querySelector('#dCard6')
-                    dealerCard6.src = cards[5].image
-                    dealerCard6.classList.remove("hidden")
-                    dealerTotal = dealerTotal + parseInt(cardsValueNew[5])
-                    if(dealerTotal > 21 && true === cardsValueNew.includes("11"))
-                        for(i=0; i < cardsValueNew.length; i++){
-                            if(cardsValueNew[i] === "11"){
-                                cardsValueNew[i] = 1
-                            }
-                        dealerTotal =  parseInt(cardsValueNew[0]) + parseInt(cardsValueNew[1]) + parseInt(cardsValueNew[2]) + parseInt(cardsValueNew[3])+ parseInt(cardsValueNew[4])+ parseInt(cardsValueNew[5])
-                        }
+                    updateDealerCardandValue()
                     if (dealerTotal > 21){
                         setTimeout(() => {
                             alert("Congrats, Dealer Busted. You Won!")}, 1000)
@@ -195,18 +160,7 @@ function stayClick(){
                     }
                     gameOver(dealerTotal, userTotal)
                     if (dealerTotal <=16){
-                        let dealerCard7 = document.querySelector('#dCard7')
-                        dealerCard7.src = cards[6].image
-                        dealerCard7.classList.remove("hidden")
-                        dealerTotal = dealerTotal + parseInt(cardsValueNew[6])
-                        if(dealerTotal > 21 && true === cardsValueNew.includes("11"))
-                            for(i=0; i < cardsValueNew.length; i++){
-                                if(cardsValueNew[i] === "11"){
-                                    cardsValueNew[i] = 1
-                                }
-                            dealerTotal =  parseInt(cardsValueNew[0]) + parseInt(cardsValueNew[1]) + parseInt(cardsValueNew[2]) + parseInt(cardsValueNew[3])+ parseInt(cardsValueNew[4])+ parseInt(cardsValueNew[5])+ parseInt(cardsValueNew[6])
-     
-                            }
+                        updateDealerCardandValue()
                         if (dealerTotal > 21){
                             setTimeout(() => {
                                 alert("Congrats, Dealer Busted. You Won!")}, 1000)
@@ -251,8 +205,34 @@ function gameOver(dealerTotal, userTotal){
             myResetFunc()
     }
 }
+function updateDealerCardandValue(){
+    let dealerCard = document.querySelector("#dCard1")
+    dealerTotal = 0 
+    for (let i = 0; i<= newCount; i++){
+        dealerCard[i] = document.querySelector(`#dCard${i+1}`)
+        dealerCard[i].src = cards[i].image
+        dealerCard[i].classList.remove("hidden")
+        dealerTotal = dealerTotal + parseInt(cardsValueNew[i])
+    }
+        if(dealerTotal > 21 && true === cardsValueNew.includes("11")){
+            for(i=0; i < cardsValueNew.length; i++){
+                if(cardsValueNew[i] === "11"){
+                    cardsValueNew[i] = 1
+                }
+            }
+            dealerTotal = 0 
+                for (let i = 0; i<= newCount; i++){
+                    dealerTotal = dealerTotal + parseInt(cardsValueNew[i])
+                }
+        }
+    newCount++
+return dealerTotal
+}
 function myResetFunc(){
     let reset = document.getElementById("reset")
+    document.getElementById("stayBtn").disabled = true
+    document.getElementById("hitBtn").disabled = true
+    newCount = 1
     reset.addEventListener("click", ()=> {
         document.getElementById("dealBtn").disabled = false
         for(let i = 0; i< cardImages.length;i++){
@@ -270,25 +250,19 @@ function myResetFunc(){
 }
 function userWin(){
     let newMoney = 5 
-    console.log(newMoney)
     let balanceDiv = document.getElementById("balancethis")
     balanceDiv.classList.add("parent")
-    let userBalance = document.getElementById("total").innerHTML    
-    console.log(userBalance) 
+    let userBalance = document.getElementById("total").innerHTML     
     let overallBalance = parseInt(userBalance) + newMoney
-    console.log(overallBalance)
     document.getElementById("total").innerHTML = overallBalance
     color()
 }
 function dealerWin(){
     let newMoney1 = 5 
-    console.log(newMoney1)
     let balanceDiv = document.getElementById("balancethis")
     balanceDiv.classList.add("parent")
-    let userBalance1 = document.getElementById("total").innerHTML 
-    console.log(userBalance1)     
+    let userBalance1 = document.getElementById("total").innerHTML      
     let overallBalance1 = parseInt(userBalance1) - newMoney1
-    console.log(overallBalance1)
     document.getElementById("total").innerHTML = overallBalance1
     color()
 }
