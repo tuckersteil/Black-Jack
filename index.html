@@ -4,12 +4,12 @@
         <meta charset="utf-8">
         <title>Blackjack</title>
         <link rel="stylesheet" href="style.css">
-        <script src="Index.js"></script>
+        <script src="index.js"></script>
 </head>
 <body>
     <header>
-        <h1>Simple $5 BlackJack Hands</h1>
-        <h3>Rules: No splitting & No double down</h3>
+        <h1>Blackjack: $5 Minimum Table</h1>
+        <h3>Rules: No splitting</h3>
     </header>
 
     <div id="hands">
@@ -34,6 +34,7 @@
                 <img id="uCard7" class="hidden" src="https://media.istockphoto.com/photos/bicycle-rider-back-playing-card-design-picture-id157772536?s=612x612" width="100" height="150">
             </div>
             <h1 id="userHands">User's Hand</h1>
+            <h1 id="betSizeTitle">Wager Amount:</h1>
             <h1 id="currentCount" style="display:none"></h1>
         </div>
     </div>
@@ -47,10 +48,16 @@
         </div>
         </div>
         <div class="parent">
+            <div>
+                <h1 id="userHands">Place Your Bet $</h1>
+                <input id="betAmount" type="text">
+            </div>
+            
             <button id="dealBtn">Deal</button>
             <button class="array" id="hitBtn">Hit</button>
             <button class="array" id="stayBtn">Stay</button>
             <button id="reset" type ="reset">Reset Hand's</button>
+            <button id="doubledown">Double Down</button>
         </div>
     </div> 
 </body>

@@ -6,7 +6,9 @@ let userTotal
 let cards
 let dealerTotal 
 let newCount = 1
+let wagerAmount = 5
 function dealCards(data){
+    console.log(data)
     document.getElementById("dealBtn").disabled = true
     count = 0
     cards = data.cards
@@ -33,9 +35,16 @@ function dealCards(data){
         }
     })
     cardsValueNew = cardValues
+    console.log(cardsValueNew)
+    
+    
+
     nextAction()
 }   
+
 function nextAction(){
+    let dd = document.getElementById("doubledown")
+    dd.addEventListener("click", doubleDown)
     let hitStayArray = [...document.getElementsByClassName("array")];
     hitStayArray.forEach(button => {
         button.addEventListener("click", userAction)
@@ -52,15 +61,25 @@ function userAction(button){
 function increase(){ 
     return count++
 }
-
+function doubleDown() {
+    wagerAmount = wagerAmount * 2 
+    document.querySelector("#betSizeTitle").textContent = "Wager Amount:  " +  wagerAmount
+    userHit()
+    let ddCount = parseInt(allUserCards[0])+ parseInt(allUserCards[1]) + parseInt(allUserCards[2])
+    if (ddCount < 22){
+        stayClick()
+    }
+}
 function userHit(){
     allUserCards = [ 1, 2, 3, 4, 5, 6, 7]
     increase()
+
     for (let i = 0; i <allUserCards.length; i++){
         allUserCards[i] = cardsValueNew[i+7]
     }
     userTotal = parseInt(allUserCards[0])+ parseInt(allUserCards[1])
     hitAndCount(allUserCards, userTotal)
+    console.log(allUserCards)
 }
 function hitAndCount(allUserCards, userTotal){
     for(i = 0; i <= count - 1; i++){
@@ -71,10 +90,15 @@ function hitAndCount(allUserCards, userTotal){
         
     } 
     if (userTotal > 21){
+        console.log(userTotal)
             if (userTotal > 21 && true === allUserCards.includes("11")){
+                var theNewTotal = userTotal
                 for(i=0; i <= count +1; i++){
                     if(allUserCards[i] === "11"){
-                        allUserCards[i] = 1
+                        if (theNewTotal > 21) {
+                            allUserCards[i] = 1
+                            theNewTotal = theNewTotal - 10
+                        }
                     }
                     userTotal = 0
                     for (let i = 0; i <= count+1; i++){
@@ -91,6 +115,7 @@ function hitAndCount(allUserCards, userTotal){
                     myResetFunc()
             }
     }
+    console.log(userTotal)
 }
 function stayClick(){    
     if (count === 0){
@@ -103,9 +128,16 @@ function stayClick(){
     }
     if (userTotal > 21){
         if (userTotal > 21 && true === allUserCards.includes("11")){
+            var theNewTotal = userTotal
             for(i=0; i <= count +1; i++){
+                // if(allUserCards[i] === "11"){
+                //     allUserCards[i] = 1
+                // }
                 if(allUserCards[i] === "11"){
-                    allUserCards[i] = 1
+                    if (theNewTotal > 21) {
+                        allUserCards[i] = 1
+                        theNewTotal = theNewTotal - 10
+                    }
                 }
                 userTotal = 0
                 for (let i = 0; i <= count+1; i++){
@@ -194,6 +226,8 @@ function gameOver(dealerTotal, userTotal){
             dealerWin()
     }
     else if (dealerTotal < 21 && dealerTotal >= 17 && dealerTotal < userTotal){
+        console.log(dealerTotal)
+        console.log(userTotal)
         setTimeout(() => {
             alert("Congrats You Won!")}, 1000) 
             myResetFunc()
@@ -249,7 +283,7 @@ function myResetFunc(){
     })
 }
 function userWin(){
-    let newMoney = 5 
+    let newMoney = parseInt(wagerAmount)
     let balanceDiv = document.getElementById("balancethis")
     balanceDiv.classList.add("parent")
     let userBalance = document.getElementById("total").innerHTML     
@@ -258,7 +292,7 @@ function userWin(){
     color()
 }
 function dealerWin(){
-    let newMoney1 = 5 
+    let newMoney1 = parseInt(wagerAmount)
     let balanceDiv = document.getElementById("balancethis")
     balanceDiv.classList.add("parent")
     let userBalance1 = document.getElementById("total").innerHTML      
@@ -285,9 +319,17 @@ function color(){
         userColor.classList.add("balance")
     }
 }
+// const cardstodeal = (cardsArr) => {
+//     //returns 14 cards
+// }
 document.addEventListener("DOMContentLoaded", () => {
     const dealBtn = document.querySelector("#dealBtn");
     dealBtn.addEventListener("click", () => {
+        if (document.getElementById("betAmount").value) {
+            wagerAmount = document.getElementById("betAmount").value
+        }
+        let test = document.querySelector("#betSizeTitle").textContent = "Wager Amount:  " +  wagerAmount
+        console.log(test, wagerAmount)
         document.getElementById("stayBtn").disabled = false
         document.getElementById("hitBtn").disabled = false
         fetch('https://deckofcardsapi.com/api/deck/new/draw/?count=14')
@@ -295,3 +337,4 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => dealCards(data))
     })
 })
+
